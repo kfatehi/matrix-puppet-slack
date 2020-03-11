@@ -40,6 +40,21 @@ Launch the bridge with ```node index.js```.
 
 Restart your HS.
 
+## docker
+
+Build the docker image with `docker build -t matrix-puppet-slack .`.
+
+Copy `config.sample.json` to `config.json` and update it to match your setup.
+You can work in any directory you want as you have the docker image now.
+Set the `registrationPath` in the `config.json` to `/data/slack-registration.yaml`.
+
+Generate the `slack-registration.yaml` file in the data volume with ``docker run --rm -it -v `pwd`/data:/data -v `pwd`/config.json:/usr/src/app/config.json matrix-puppet-slack node index.js -r -u "http://your-bridge-server:8090"``.
+
+As discribed in [register the app service](#register-the-app-service)
+copy the registration file to your homeserver and add it to your homeserver.yaml file.
+
+Launch the bridge with ``docker run -v `pwd`/data:/data -v `pwd`/config.json:/usr/src/app/config.json matrix-puppet-slack`` or via docker-compose.
+
 ## Discussion, Help and Support
 
 Join us in the [![Matrix Puppet Bridge](https://user-images.githubusercontent.com/13843293/52007839-4b2f6580-24c7-11e9-9a6c-14d8fc0d0737.png)](https://matrix.to/#/#matrix-puppet-bridge:matrix.org) room
