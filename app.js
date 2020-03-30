@@ -200,7 +200,7 @@ class App extends MatrixPuppetBridgeBase {
       const { buffer, type } = await this.client.downloadImage(data.file.url_private);
       payload.buffer = buffer;
       payload.mimetype = type;
-      return await this.handleThirdPartyRoomImageMessage(payload);
+      return await this.handleThirdPartyRoomMessageWithAttachment(payload);
     } catch (err) {
       debug('could not send the file data', err.message);
       payload.text = '[Image] ('+data.name+') '+data.url;
